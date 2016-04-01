@@ -1,0 +1,15 @@
+Marine Regions Named Entity Recognizer
+
+Erwin Marsi - 2016
+
+Exploratory code to detect and link named entities from Marine Regions gazetteer
+(http://www.marineregions.org/gazetteer.php?p=search) in raw text.
+
+Requires an export of fiels the Marine Regions database in CVS format with field
+MRGID, GeoName, Language and Placetype.
+
+This is very much experimental and certainly not fit for production.
+
+
+
+
