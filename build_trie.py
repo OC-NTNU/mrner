@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 build trie from export of Marine Regions database
@@ -128,7 +128,7 @@ def print_trie(node, start_token):
 
 if __name__ == '__main__':
     # Usage example:
-    # mrner/build_trie.py marineregions_gazetteer_export_2016-03-30.csv mr_trie.pkl
+    # python3 mrner/build_trie.py marineregions_gazetteer_export_2016-03-30.csv mr_trie.pkl
     import sys
     logging.basicConfig(level=logging.DEBUG)
     csv_fname, pkl_fname = sys.argv[1:3]

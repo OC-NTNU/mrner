@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 match entities in text
@@ -94,7 +94,7 @@ def print_matches(fname, tokens, matches):
 
 if __name__ == '__main__':
     # Usage example:
-    # mrner/match_ent.py mr_trie.pkl "../nature/abs/soa/*.txt" >abs_matches.txt 2>abs_partial_matches.txt
+    # python3 mrner/match_ent.py mr_trie.pkl "../nature/abs/soa/*.txt" >abs_matches.txt 2>abs_partial_matches.txt
     import sys
 
     logging.basicConfig(level=logging.DEBUG)
