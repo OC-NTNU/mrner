@@ -7,6 +7,7 @@ build trie from export of Marine Regions database
 from collections import namedtuple
 from pickle import dump
 
+import re
 import logging
 
 log = logging.getLogger(__name__)
@@ -21,12 +22,16 @@ SKIPPED_PLACE_TYPES = {'ICES Statistical Rectangles',
 # names which are skipped because they coincide with very frequent words in English
 SKIPPED_GEO_NAMES = {'As', 'Of'}
 
+# other names which are skipped because of collisions, e.g. "H2"
+SKIPPED_GEO_NAMES_PAT = r"^[A-Z]+[0-9][A-Z0-9]*$"
+
 # Tuple representing an entity with a list of tokens and a unique id
 Entity = namedtuple('Entity', ('tokens', 'id'))
 
 
 def read_mr_entities(csv_fname,
                      skipped_geo_names=SKIPPED_GEO_NAMES,
+                     skipped_geo_names_pat=SKIPPED_GEO_NAMES_PAT,
                      skipped_place_types=SKIPPED_PLACE_TYPES):
     """
     Read partial export of Marine Regions database in CSV format
@@ -35,6 +40,8 @@ def read_mr_entities(csv_fname,
     Returns a list of Entity tuples.
     """
     entities = []
+    skipped_geo_names_re = re.compile(skipped_geo_names_pat)
+
 
     log.info('reading entities from file ' + csv_fname)
     with open(csv_fname) as f:
@@ -49,7 +56,8 @@ def read_mr_entities(csv_fname,
                 continue
 
             if (place_type in skipped_place_types or
-                        geo_name in skipped_geo_names):
+                geo_name in skipped_geo_names or
+                skipped_geo_names_re.match(geo_name)):
                 log.debug('skipping: ' + line)
                 continue
 
